@@ -1,0 +1,33 @@
+1)
+SELECT `degrees`.`name` as `Nome_corso_di_laurea`, `students`.* 
+FROM `students`
+JOIN `degrees`
+ON `degrees`.`id` = `students`.`degree_id`
+WHERE `degrees`.`name` = 'Corso di Laurea in Economia';
+
+2)
+SELECT `degrees`.`level` as `Livello_corso_laurea`, `departments`.* 
+FROM `degrees`
+JOIN `departments`
+ON `departments`.`id` = `degrees`.`department_id`
+WHERE `degrees`.`level` = 'magistrale'
+AND `departments`.`name` = 'Dipartimento di Neuroscienze';
+
+3)
+SELECT `teachers`.`id` as `id_insegnante`, `teachers`.`name` as `nome_insegante`, `teachers`.`surname` as `cognome_insegnante`, `courses`.* 
+FROM `teachers`
+JOIN `course_teacher`
+ON `course_teacher`.`teacher_id` = `teachers`.`id`
+JOIN `courses`
+ON `courses`.`id` = `course_teacher`.`course_id`
+WHERE `teachers`.`id` = 44;
+
+4)*
+SELECT COUNT(`students`.`id`), `students`.*
+FROM `students`
+JOIN `degrees`
+ON `degrees`.`department_id` = `students`.`degree_id`
+JOIN `departments`
+ON `departments`.`id` = `degrees`.`department_id`
+GROUP BY `students`
+ORDER BY `students`.`surname` ASC;
